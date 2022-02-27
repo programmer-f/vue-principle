@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="./js/vue.js"></script> -->
+  <script src="./js/fue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="name"/>
+    <div v-on:click="handleClick">click here!</div>
+    <div>{{nameAge}}</div>
+  </div>
+  <script>
+    /*
+    1.要想使用Vue必须要先创建Vue实例，创建Vue实例通过new来创建，说明Vue是一个类，
+    所以我们要想使用自己的Vue，就必须定义一个名称叫做Vue的类
+
+    2.只要创建好了Vue的实例，Vue就会根据指定的区域和数据，去编译渲染这个区域
+    所以我们需要在自己编写的Vue实例中拿到数据和控制区域，去编译渲染这个区域
+    注意点：创建Vue实例的时候指定的控制区域可以是一个选择器，也可以是一个dom元素
+          vue实例会将创建时候传递的控制区域和数据都绑定到创建出来的实例上
+          $el  $data
+    
+    */
+    // let vue = new Vue({
+    let vue = new Fue({
+      el:'#app',
+      // el:document.querySelector('#app'),
+      data:{
+        name:'fjp',
+        age:23
+      },
+      methods:{
+        handleClick(e){
+          console.log(this.name);
+          this.showComputed();
+        },
+        handleTest(){
+          console.log('handleTest');
+        },
+        showComputed(){
+          console.log(this.nameAge);
+        }
+      },
+      computed:{
+        nameAge(){
+          return this.name + this.age;
+        }
+      }
+    });
+    // console.log(vue.$el);
+    // console.log(vue.$data);
+  </script>
+</body>
+</html>
