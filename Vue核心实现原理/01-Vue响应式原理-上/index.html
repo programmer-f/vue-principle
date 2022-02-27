@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01-Vue基本模板</title>
+    <!-- 下载导入Vue.js -->
+    <script src="./js/vue.js"></script>
+  </head>
+  <body>
+    <!-- <div id="app">
+      <input type="text" v-model="name" />
+      <p>{{name}}</p>
+    </div> -->
+    <script>
+      // let vue = new Vue({
+      //   el: '#app',
+      //   data: {
+      //     name: '方剑鹏',
+      //   },
+      // });
+
+      /*
+      defineProperty方法
+      特点：可以直接在一个对象上定义新属性，或者修改一个对象的现有属性，并返回这个对象
+
+      defineProperty用法：
+      obj：需要操作的对象
+      prop：需要操作的属性
+      descriptor：属性描述符
+      Object.defineProperty(obj, prop, descriptor)
+      */
+
+
+      let obj = {name:'andy'};
+      Object.defineProperty(obj, 'name', {
+        value:'方剑鹏',
+        //默认情况下通过defineProperty新增的属性的取值是不能修改的
+        writable: true,
+        configurable:true,
+        enumerable:true
+      });
+      // delete obj.name;
+      console.log(obj);
+
+      // for(let key in obj){
+      //   console.log(key, obj[key]);
+      // }
+    </script>
+  </body>
+</html>

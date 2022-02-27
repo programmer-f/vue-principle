@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <script>
+    /*
+    defineProperty还可以给对象的某个属性添加get/set方法
+    获取这个属性值就会调用get方法，设置这个属性的值就会自动调用set方法
+    如果设置了get/set方法，那么就不能通过value直接赋值，也不能编写writable:true
+    */
+    let obj = {};
+    let oldValue = '方剑鹏';
+    Object.defineProperty(obj, 'name', {
+      // value:oldValue,
+      // writable:true,
+      get(){
+        console.log('get方法被执行了');
+        return oldValue;
+      },
+      set(newValue){
+        if(newValue !== oldValue){
+          console.log('set方法被执行了');
+          oldValue = newValue;
+        }
+      }
+    });
+    console.log(obj.name);
+    obj.name = 'fjp';
+  </script>
+</body>
+</html>
