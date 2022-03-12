@@ -7,14 +7,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     name: 'andy',
-    age: 23,
+    num: 0,
   },
   getters: {
     myName(state) {
       return state.name + '666';
     },
   },
-  mutations: {},
+  mutations: {
+    addNum(state, payload) {
+      console.log(state, payload);
+      state.num += payload;
+    },
+  },
   actions: {},
   modules: {},
 });
