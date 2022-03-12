@@ -1,15 +1,14 @@
 <template>
   <div class="hello">
-    <div>{{ $store.state.name }}</div>
-    <input type="text" v-model="$store.state.name" />
+    <div>{{ $store.getters.myName }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String,
+  created() {
+    console.log(this.$store);
   },
 };
 </script>
