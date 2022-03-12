@@ -3,6 +3,8 @@
     <div>{{ $store.getters.myName }}</div>
     <div>num:{{ $store.state.num }}</div>
     <button @click="handleAddNum">addNum</button>
+    <div>age:{{ $store.state.age }}</div>
+    <button @click="handleAddAge">addAge</button>
   </div>
 </template>
 
@@ -15,6 +17,9 @@ export default {
   methods: {
     handleAddNum() {
       this.$store.commit('addNum', 10);
+    },
+    handleAddAge() {
+      this.$store.dispatch('asyncAddAge', 5);
     },
   },
 };

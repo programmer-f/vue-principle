@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     name: 'andy',
     num: 0,
+    age: 0,
   },
   getters: {
     myName(state) {
@@ -19,7 +20,17 @@ export default new Vuex.Store({
       console.log(state, payload);
       state.num += payload;
     },
+    addAge(state, payload) {
+      state.age += payload;
+    },
   },
-  actions: {},
+  //异步改变共享数据
+  actions: {
+    asyncAddAge({ commit }, payload) {
+      setTimeout(() => {
+        commit('addAge', payload);
+      }, 3000);
+    },
+  },
   modules: {},
 });

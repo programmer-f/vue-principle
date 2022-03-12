@@ -26,6 +26,7 @@ class Store {
     Vue.util.defineReactive(this, 'state', options.state); //快速将某个数据变成双向绑定的数据
     this.initGetters(options);
     this.initMutations(options);
+    this.initActions(options);
   }
 
   initGetters(options) {
@@ -43,10 +44,12 @@ class Store {
     }
   }
   //触发mutations里面的方法
-  commit(type, payload) {
+  commit = (type, payload) => {
+    console.log(this);
     //'addNum', 10
+    //为了避免找不到this，将commit方法变为箭头函数
     this.mutations[type](payload); // this.mutations[addNum](10)
-  }
+  };
   initMutations(options) {
     let mutations = options.mutations || {};
     this.mutations = {};
@@ -54,6 +57,20 @@ class Store {
       this.mutations[key] = (payload) => {
         // 10
         mutations[key](this.state, payload); // addNum(this.state,10)
+      };
+    }
+  }
+  dispatch(type, payload) {
+    //'asyncAddAge', 5
+    //为了避免找不到this，将方法变为箭头函数
+    this.actions[type](payload); // this.actions['asyncAddAge'](5);
+  }
+  initActions(options) {
+    let actions = options.actions || {};
+    this.actions = {};
+    for (let key in actions) {
+      this.actions[key] = (payload) => {
+        actions[key](this, payload); //actions['asyncAddAge'](this,5);
       };
     }
   }
