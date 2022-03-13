@@ -3,34 +3,105 @@ import Vue from 'vue';
 import Vuex from './fuex';
 
 Vue.use(Vuex);
-
-export default new Vuex.Store({
+//login模块
+const login = {
   state: {
-    name: 'andy',
-    num: 0,
-    age: 0,
+    loginName: 'com',
   },
   getters: {
-    myName(state) {
-      return state.name + '666';
+    getLoginName(state) {
+      return state.loginName + 'get';
     },
   },
   mutations: {
-    addNum(state, payload) {
-      console.log(state, payload);
-      state.num += payload;
+    changeLoginName(state, payload) {
+      state.loginName += payload;
     },
-    addAge(state, payload) {
-      state.age += payload;
+  },
+  actions: {
+    asyncChangeLoginName({ commit }, payload) {
+      setTimeout(() => {
+        commit('changeLoginName', payload);
+      }, 3000);
+    },
+  },
+};
+//home模块
+const home = {
+  state: {
+    homeName: 'www',
+  },
+  getters: {
+    getHomeName(state) {
+      return state.homeName + 'get';
+    },
+  },
+  mutations: {
+    changeHomeName(state, payload) {
+      state.homeName += payload;
+    },
+  },
+  actions: {
+    asyncChangeHomeName({ commit }, payload) {
+      setTimeout(() => {
+        commit('changeHomeName', payload);
+      }, 3000);
+    },
+  },
+};
+//account模块
+const account = {
+  state: {
+    accountName: 'it666',
+  },
+  getters: {
+    getAccountName(state) {
+      return state.accountName + 'get';
+    },
+  },
+  mutations: {
+    changeAccountName(state, payload) {
+      state.accountName += payload;
+    },
+  },
+  actions: {
+    asyncChangeAccountName({ commit }, payload) {
+      setTimeout(() => {
+        commit('changeAccountName', payload);
+      }, 3000);
+    },
+  },
+  modules: {
+    login: login,
+  },
+};
+
+export default new Vuex.Store({
+  state: {
+    globalName: 'andy',
+  },
+  getters: {
+    getGlobalName(state) {
+      return state.globalName + 'get';
+    },
+  },
+  mutations: {
+    changeGlobalName(state, payload) {
+      console.log('全局的changeGlobalName');
+      state.globalName += payload;
     },
   },
   //异步改变共享数据
   actions: {
-    asyncAddAge({ commit }, payload) {
+    asyncChangeGlobalName({ commit }, payload) {
       setTimeout(() => {
-        commit('addAge', payload);
+        commit('changeGlobalName', payload);
       }, 3000);
     },
   },
-  modules: {},
+  //模块化共享数据
+  modules: {
+    home: home,
+    account: account,
+  },
 });
